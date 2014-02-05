@@ -48,7 +48,6 @@ module Xibit
   # set during the request lifecycle or by the controller class, and should
   # not be manually defined for this method.
   def self.serialize(resource, options={})
-    
     serializer = if options.has_key? :serializer
       options.delete :serializer
     else 

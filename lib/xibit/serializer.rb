@@ -66,7 +66,13 @@ module Xibit
       @params = options[:params]
       params.symbolize_keys! if params.respond_to? :symbolize_keys!
       
-      @resource_type = object.respond_to?(:to_ary) ? :collection : :instance
+      @resource_type = if object.respond_to?(:to_ary)
+                         :collection
+                       elsif object == options[:resource_class]
+                         :collection
+                       else
+                         :instance
+                       end
       @object = on_initialize(object)
     end
 

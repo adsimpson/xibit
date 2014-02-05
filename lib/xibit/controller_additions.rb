@@ -47,6 +47,7 @@ private
       options[:resource_class] = 
         resource.respond_to?(:model) ? resource.model.name.constantize :
         resource.respond_to?(:to_ary) ? self.controller_name.classify.constantize : 
+        resource.respond_to?(:ancestors) && resource.ancestors.include?(ActiveRecord::Base) ? resource :
         resource.class.name.constantize
       
       options[:controller_class] = self.class.name
